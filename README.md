@@ -9,7 +9,7 @@ This is a program that generates information cards for fanfic writers to referen
 
 —Book 1's description on Amazon
 
-_The Nature of Predators_ is a sci-fi web serial by u/SpacePaladin15 that was initially published on the [r/hfy](reddit.com/r/hfy) subreddit, in addition to a sequel, Patreon-exclusive bonus stories, and a paperback series available Amazon.  It garnered a fairly sizeable community of fanfic writers in [it's own subreddit](reddit.com/r/NatureofPredators).
+_The Nature of Predators_ is a sci-fi web serial by u/SpacePaladin15 that was initially published on the [r/hfy](reddit.com/r/hfy) subreddit, in addition to a sequel, Patreon-exclusive bonus stories, and a paperback series available Amazon.  It garnered a fairly sizeable community of fanfic writers in [its own subreddit](reddit.com/r/NatureofPredators).
 
 [[First chapter on Reddit](https://www.reddit.com/r/HFY/comments/u19xpa/the_nature_of_predators/)] [[First chapter of the sequel on Reddit](https://www.reddit.com/r/HFY/comments/195q9rx/the_nature_of_predators_21/)] [[Book 1 on Amazon](https://www.amazon.com/dp/B0CPXTZCCW?ref_=pe_93986420_775043100)]
 
