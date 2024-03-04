@@ -9,7 +9,7 @@ root = etree.fromstring(bytes(xml,encoding = 'utf-8'))
 depth = 0
 
 tree = etree.ElementTree(root)
-def printspaces(depth):
+def printspaces(depth): 
     output = ''
     for i in range(0,depth):
         output += ' '
