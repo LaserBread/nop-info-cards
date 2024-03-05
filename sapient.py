@@ -3,50 +3,27 @@
 ###############################################################################
 
 class species:
-    def __init__(self, *args):
-        if(len(args) == 9):
-            self.fromseries(*args)
-        else:
-            
-            self.name = "unknown" # Name of the species
-            self.id = None
-            self.ht = "???" # Average height of the species in feet
-            self.blood = "???" # Color of the species' blood
-            self.homeworld = "???"  # Planet the species originates from
-            self.diet = "???" # What the species eats
-            self.cure = False # Did the species recieve The Cure on mass scale?
-            self.alter = False # Was the species' DNA altered (other than cure)
-            self.desc = None # descirption of the species
-            self.flavor = None # Snarky quip ragarding them
-            self.affiliations = [] # List of all affiliations the species has
-            self.from_fanfic = False # Is the species from an NoP fanfic?
-            self.fic_name = None # What is the fic's name (None if canon)
-            self.fic_author = None # What is the fic author's name (none if canon)
-            self.color_A_side = 0x000000
-            self.color_B_side = 0x000000
-    
-    
-    def fromseries(self,name,htft,blood,homeworld,diet,cure,alter,desc,flavor):
-        self.name = name
-        self.ht = htft
-        self.blood = blood
-        self.homeworld = homeworld
-        self.diet = diet
-        self.cure = cure
-        self.alter = alter
-        self.desc = desc
-        self.flavor = flavor
-        self.affiliations = []
-        self.from_fanfic = False
-        self.fic_name = None
-        self.fic_author = None
+    def __init__(self):
+        self.name = "unknown" # Name of the species
         self.id = None
+        self.stances = [] # Dict of the species' stance and height.
+        self.blood = "???" # Color of the species' blood
+        self.homeworld = "???"  # Planet the species originates from
+        self.diet = "???" # What the species eats
+        self.cure = False # Did the species recieve The Cure on mass scale?
+        self.alter = False # Was the species' DNA altered (other than cure)
+        self.desc = None # descirption of the species
+        self.flavor = None # Snarky quip ragarding them
+        self.affiliations = [] # List of all affiliations the species has
+        self.from_fanfic = False # Is the species from an NoP fanfic?
+        self.fic_name = None # What is the fic's name (None if canon)
+        self.fic_author = None # What is the fic author's name (none if canon)
         self.color_A_side = 0x000000
         self.color_B_side = 0x000000
 
     # Add an affiliation listing 
     def add_affil(self, in_name, in_desc):
-        if(len(self.affiliations) > 6):
+        if(len(self.affiliations) >= 6):
             raise Exception("Too many affiliation entries!")
         self.affiliations.append(dict(name = in_name, desc = in_desc))
 
@@ -98,4 +75,14 @@ class species:
         else:
             self.color_B_side = int(in_color, base=16)
     
+    def add_stance(self, in_stance, in_height):
+        if(self.num_stances() >= 2):
+            raise Exception("There can only be up to two stances!")
+        
+        self.stances.append(dict(stance = in_stance, height = in_height))
+
+    def get_stance(self,int):
+        return(self.stances[int])
     
+    def num_stances(self):
+        return(len(self.stances))
