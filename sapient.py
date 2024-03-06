@@ -80,7 +80,7 @@ class species:
     # Get the description of the affiliation at the specified index
     def get_affil_desc(self, index):
         return(self.affiliations[index]["desc"])
-    
+    '''====================================================================='''
 
 
     '''======== REMOVE AN AFFILIATION ======================================'''
