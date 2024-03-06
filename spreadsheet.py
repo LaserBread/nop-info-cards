@@ -76,7 +76,7 @@ In a sheet called 'Author, Description, and Colors':
     fanfic title               string          optional
     fanfic author              string          required if fanfic title is filled
 '''
-# This library uses the panda lib, shortened to 'pd' (which is accurate since 
+# This class uses the panda lib, shortened to 'pd' (which is accurate since 
 # its obtuse rules gave me predator disease, predator's disease, anxiety,
 # The Hunger, Flood from Halo, COVID, vendemic, and every other real or 
 # fictional or fictional fictional disease out there).  It parses through an
