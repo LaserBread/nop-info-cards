@@ -137,22 +137,24 @@ class datatable:
         if(pd.isnull(stab["blood color"])):
             sp.blood = "unknown"
             print(nForm(sp.name,1)+" blood color is blank.  Displaying as \"unknown\".")
-
-        sp.blood = stab["blood color"]
+        else:
+            sp.blood = stab["blood color"]
         #---------------------------------------------------------------------#
 
         #-------- CHECK AND ADD HOMEWORLD ------------------------------------#
         if(pd.isnull(stab['homeworld'])):
             sp.homeworld = "unknown"
             print(nForm(sp.name,1)+" homeworld is blank.  Displaying as \"unknown\".")
-        sp.homeworld = stab["homeworld"]
+        else:
+            sp.homeworld = stab["homeworld"]
         #---------------------------------------------------------------------#
 
         #-------- CHECK AND ADD BLOOD COLOR ----------------------------------#
         if(pd.isnull(stab["diet"])):
             sp.diet = "unknown"
             print(nForm(sp.name,1)+" diet is blank.  Displaying as \"unknown\".")
-        sp.diet = stab["diet"]
+        else:
+            sp.diet = stab["diet"]
         #---------------------------------------------------------------------#
 
         #-------- CHECK AND ADD BLOOD COLOR ----------------------------------#
@@ -172,7 +174,7 @@ class datatable:
         
         # This number is directly fed into the string we use to search the
         # table.
-        while(stab["affiliation " + str(num_affil)+" head"] and num_affil < 6):
+        while(not(pd.isnull(stab["affiliation " + str(num_affil)+" head"])) and num_affil < 6):
             # Get the name of the affiliation
             affil = stab["affiliation " + str(num_affil)+" head"]
             # Get the description, if one exists.  Otherwise, set it to a blank
@@ -196,10 +198,16 @@ class datatable:
         stab = self.desctable.loc[species_name]
 
         # Set the description
-        sp.desc = stab["description"]
+        if(not(pd.isnull(stab["description"]))):
+            sp.desc = stab["description"]
+        else:
+            sp.desc = " "
 
         #Set the flavor text
-        sp.flavor = stab["flavor text"]
+        if(not(pd.isnull(stab["flavor text"]))):
+            sp.flavor = stab["flavor text"]
+        else:
+            sp.flavor = " "
         
         #-------- CHECK AND ADD COLOR FOR CARD'S A-SIDE ----------------------#
         try:

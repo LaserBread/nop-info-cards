@@ -29,7 +29,7 @@ class builder:
         self.fed_id = self.root.xpath("svg:g/svg:g[@id='a-side-text']/svg:text[@id='fed-id']/svg:tspan", namespaces={'svg':'http://www.w3.org/2000/svg'})[0]
         self.diet = self.root.xpath("svg:g/svg:g[@id='a-side-text']/svg:text[@id='diet']/svg:tspan", namespaces={'svg':'http://www.w3.org/2000/svg'})[0]
         self.ftitle = self.root.xpath("svg:g/svg:g[@id='a-side-text']/svg:g[@id='fanfic-data']/svg:text[@id='fanfic-title']", namespaces={'svg':'http://www.w3.org/2000/svg'})[0]
-        self.fauth = self.root.xpath("svg:g/svg:g[@id='a-side-text']/svg:g[@id='fanfic-data']/svg:text[@id='fanfic-author']/svg:tspan", namespaces={'svg':'http://www.w3.org/2000/svg'})[0]
+        self.fauth = self.root.xpath("svg:g/svg:g[@id='a-side-text']/svg:g[@id='fanfic-data']/svg:text[@id='fanfic-author']/svg:tspan/svg:tspan", namespaces={'svg':'http://www.w3.org/2000/svg'})[0]
         self.ffrom = self.root.xpath("svg:g/svg:g[@id='a-side-text']/svg:g[@id='fanfic-data']/svg:text[@id='fanfic-header-from']/svg:tspan", namespaces={'svg':'http://www.w3.org/2000/svg'})[0]
         self.desc = self.root.xpath("svg:g/svg:text[@id='desc']/svg:tspan", namespaces={'svg':'http://www.w3.org/2000/svg'})[0]
         self.flavor = self.root.xpath("svg:g/svg:g[@id='b-side-text']/svg:text[@id='flavor-text']", namespaces={'svg':'http://www.w3.org/2000/svg'})[0]
@@ -96,7 +96,7 @@ class builder:
         self.set_id(species.id)
 
         if(species.num_stances() == 1):
-            self.set_monostance(species.get_stance(0)['stance'], species.fancy_height(0)['stance'])
+            self.set_monostance(species.get_stance(0)['stance'], species.fancy_height(0))
         else:
             self.set_bistance(species.get_stance(0)['stance'], species.fancy_height(0),species.get_stance(1)['stance'], species.fancy_height(1))
 
@@ -104,10 +104,7 @@ class builder:
         self.set_homeworld(species.homeworld)
         self.set_diet(species.diet)
         
-        if(species.from_fanfic):
-            self.set_fanfic(None, None)
-        else:
-            self.set_fanfic(species.fic_name, species.fic_author)
+        self.set_fanfic(species.fic_name, species.fic_author)
         
         self.set_badges(species.cure, species.alter)
 
@@ -122,10 +119,9 @@ class builder:
         self.set_desc(species.desc)
         self.set_flavor(species.flavor)
 
-        self.set_color_a("#"+hex(species.color_A_side)[2:])
-        self.set_color_b("#"+hex(species.color_B_side)[2:])
-
-        self.set_image("./assets/kissers/"+species.name+"_kisser.png")
+        self.set_color_a(species.color_A_side)
+        self.set_color_b(species.color_B_side)
+        self.set_image("./assets/kissers/"+species.name+"-kisser.png")
         self.export("tmp.svg")
         
 
@@ -170,10 +166,10 @@ class builder:
 
     def set_monostance(self,stance,height):
         for st in self.bistance_height:
-            st.text = ' '
+            st = ' '
         
         for st in self.bistance_stance:
-            st.text = ' '
+            st = ' '
         
         self.monostance_stance.text = stance
         self.monostance_height.text = height
@@ -196,14 +192,16 @@ class builder:
     def set_fanfic(self,name,author):
         if(name == None):
             self.fanfic = False
+            self.ffrom.text = ' '
             self.ftitle.text = ' '
             self.fauth.text = ' '
         else:
             self.fanfic = True
+            self.ffrom.text = 'from'
             self.ftitle.text = name
             self.fauth.text = author
         
-        self.position_badges(self.hasCure, self.hasAlter)
+        self.set_badges(self.isCured, self.isAltered)
 
     # Set image
     def set_image(self,imagefile):
@@ -240,23 +238,3 @@ class builder:
         with open(filename, 'w') as file:
             file.write(etree.tostring(self.root).decode('utf-8'))
 
-konkus = builder("./assets/template.svg")
-konkus.set_name("arxur")
-konkus.set_homeworld("wriss")
-konkus.set_id("98-G")
-konkus.set_blood("red")
-konkus.set_diet("obligate carnivore")
-konkus.set_affil_head(0,"federation")
-konkus.set_affil_desc(0,"atempted uplift in 1800s")
-konkus.set_affil_head(1,"dominion")
-konkus.set_affil_desc(1,"early 1800s to 2137")
-konkus.set_affil_head(2,"arxur consortium")
-konkus.set_affil_desc(2,"established in 2137")
-konkus.set_monostance("bipedal","8 ft / 2.4 m")
-konkus.set_image("/home/LaserBread/Documents/Games & Stories/Nature of Predators/Species-info-cards/Red/arxur-kisser.png")
-konkus.set_badges(False, False)
-konkus.set_color_a("#4f4f4f")
-konkus.set_color_b("#6A1D1D")
-konkus.set_desc("One can't help but feel sorry for the fearsome arxurs. They spent the past three centuries under a fascistic regime that silenced all compassion and forced them to eat other sapients to survive. All to maintain the federation's facade. Now, after decades of isolation, the Arxur Consortium eagerly awaits a second chance in the galaxy.")
-konkus.set_flavor("Wriss has become the galaxy's Florida.  Is it any wonder what SP's true identity is?")
-konkus.export("dakar.svg")
