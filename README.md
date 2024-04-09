@@ -1,5 +1,10 @@
 This is a program that generates information cards for fanfic writers to reference in _The Nature of Predators_ community. These cards can be looked at independently or possibly be invoked by a discord bot. (Discord bot is its own separate project). It is flexible enough to also include references for any fanmade species and credit their authors.
 
+# Prerequisites
+You will need Inkscape installed and on your PATH.  I haven't figured out a way to properly get the program working without Inkscape, as it's the only program that supports the SVG2 format.
+
+You will also need lxml and pandas.
+
 # About _The Nature of Predators_
 >When humanity finally begins to explore the stars, they are eager to befriend the civilizations they encounter, but galactic affairs are not so simple. An interplanetary war rages, and the fledgling human space navy finds itself caught between two sides of the war. The Federation, on one side, is comprised entirely of herbivorous species and is terrified of all predators, including humans. On the other side, the Arxur are carnivores who defeat and devour their enemies in combat.
 >
