@@ -9,7 +9,7 @@ def check_contrast(hex_color):
         hex_green = int(color[2:4], base=16)
         hex_blue = int(color[4:6], base=16)
 
-        if (hex_red * 0.2126 + hex_green * 0.7152 + hex_blue * 0.0722 < 140):
+        if (hex_red * 0.2126 + hex_green * 0.7152 + hex_blue * 0.0722 < 170):
             return("#ffffff")
         else:
             return("#000000")

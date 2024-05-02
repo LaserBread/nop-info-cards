@@ -1,0 +1,9 @@
+Syntax
+
+gen-card [spreadhseet doc] [species name] [image for portrait]
+gen-card [spreadsheet doc] [directory with images]
+
+### GENERATING THE CARDS 
+Options:
+--all - generate all cards for valid species in the spreadsheet.
+--abort-on-fail - Program stops if an incomplete entry was detected.

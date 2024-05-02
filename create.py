@@ -1,3 +1,4 @@
+#!/bin/python3
 from spreadsheet import datatable 
 from svg_generator import builder
 import subprocess
