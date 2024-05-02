@@ -166,10 +166,10 @@ class builder:
 
     def set_monostance(self,stance,height):
         for st in self.bistance_height:
-            st = ' '
+            st.text = ' '
         
         for st in self.bistance_stance:
-            st = ' '
+            st.text = ' '
         
         self.monostance_stance.text = stance
         self.monostance_height.text = height

@@ -24,15 +24,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
      inkscape:document-units="px"
-     inkscape:zoom="0.4867783"
-     inkscape:cx="428.32641"
-     inkscape:cy="447.84248"
+     inkscape:zoom="0.8270577"
+     inkscape:cx="1025.926"
+     inkscape:cy="524.75178"
      inkscape:window-width="1920"
-     inkscape:window-height="970"
+     inkscape:window-height="984"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="portrait"
+     inkscape:current-layer="layer1"
      showgrid="false" /><defs
      id="defs1"><rect
        x="846.2799"
@@ -209,7 +209,8 @@
        id="desc"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:41.3333px;font-family:Cantarell;-inkscape-font-specification:Cantarell;text-align:start;white-space:pre;shape-inside:url(#description-flowbox);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:14.4;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
        x="853.9519"
-       y="493.25287"><tspan
+       y="493.25287"
+       transform="translate(4)"><tspan
          id="tspan1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nulla blandit justo a metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse potenti. Pellentesque suscipit accumsan massa. Maecenas justo. Nam a nunc. Vivamus feugiat. Donec diam eros, tristique sit amet,
 
 </tspan></text><g
