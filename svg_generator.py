@@ -158,11 +158,11 @@ class builder:
         self.monostance_stance.text = ' '
         self.monostance_height.text = ' '
 
-        self.bistance_stance[0] = stance0
-        self.bistance_height[0] = height0
+        self.bistance_stance[0].text = stance0
+        self.bistance_height[0].text = height0
 
-        self.bistance_stance[1] = stance1
-        self.bistance_height[1] = height1
+        self.bistance_stance[1].text = stance1
+        self.bistance_height[1].text = height1
 
     def set_monostance(self,stance,height):
         for st in self.bistance_height:

@@ -186,7 +186,7 @@ class species:
     # impereal, and rounds that and the measurement system God intended to the
     # nearest tenth.
     def fancy_height(self, in_stance):
-        output =  str(round(self.stances[in_stance]['height'] * 3.28084, 1))
+        output = str(round(self.stances[in_stance]['height'] * 3.28084, 1))
         output += " ft / "
         output += str(round(self.stances[in_stance]['height'], 1)) + " m"
         return(output)
