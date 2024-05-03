@@ -183,7 +183,7 @@ class species:
 
     '''======== FANCY HEIGHT ==============================================='''
     # Shows height in the format of " x ft / y m ".  Converts to oh-god-why
-    # impereal, and rounds that and the measurement system God intended to the
+    # imperial, and rounds that and the measurement system God intended to the
     # nearest tenth.
     def fancy_height(self, in_stance):
         output = str(round(self.stances[in_stance]['height'] * 3.28084, 1))
