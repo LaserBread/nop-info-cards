@@ -2,7 +2,14 @@ from sapient import species
 from lxml import etree
 import os
 
-# Thanks to Filip Němeček for making a function I could plagirize or something lol.
+
+
+
+'''======== CHECK CONTRAST ================================================='''
+# Check the color and determine whether white text or black text should be
+# used.
+# Thanks to Filip Němeček for making a function I could plagirize or something 
+#lol.
 def check_contrast(hex_color):
         color = hex_color[1:]
 
@@ -14,8 +21,14 @@ def check_contrast(hex_color):
             return("#ffffff")
         else:
             return("#000000")
+'''========================================================================='''
 
+
+
+'''=+=+=+=+ SVG BUILDER +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+='''
+#Build an SVG image.
 class builder:
+    '''======== INIT ======================================================='''
     def __init__(self,filename):   
         with open(filename) as file:
             xml = file.read()
@@ -91,7 +104,10 @@ class builder:
 
         self.style_aside = self.root.xpath("svg:defs/svg:style[@id='a-side-style']", namespaces={'svg':'http://www.w3.org/2000/svg'})[0]
         self.style_bside = self.root.xpath("svg:defs/svg:style[@id='b-side-style']", namespaces={'svg':'http://www.w3.org/2000/svg'})[0]
+    '''====================================================================='''
 
+
+    '''======== BUILD CARD ================================================='''
     def build(self,species):
         self.set_name(species.name)
         self.set_id(species.id)
@@ -124,24 +140,35 @@ class builder:
         self.set_color_b(species.color_B_side)
         self.set_image("./assets/kissers/"+species.name+"-kisser.png")
         self.export("tmp.svg")
-        
+    '''====================================================================='''
 
+
+    '''======== SET A-SIDE COLOR ==========================================='''
     # Set the color for the a-side of the image. Ajust text color for contrast.
     def set_color_a(self,colorIn):
         self.bg_aside.attrib['style'] = "fill: " + colorIn + ";fill-opacity: 1;"
         self.style_aside.text=".a-side {\nfill:" + check_contrast(colorIn) + ";\n }"
+    '''====================================================================='''
 
+
+    '''======== SET B-SIDE COLOR ==========================================='''
     # Set the color for the b-side of the image. Ajust text color for contrast.
     def set_color_b(self,colorIn):
         self.bg_bside.attrib['style'] = "fill: " + colorIn + ";fill-opacity: 1;"
         self.style_bside.text=".b-side {\nfill:" + check_contrast(colorIn) + ";\n }"
+    '''====================================================================='''
 
-    
+
+    '''======== SET SPECIES NAME ==========================================='''
     # Set the species name.
     def set_name(self,nameIn):
         self.name.text = nameIn
-    
+    '''====================================================================='''
+
+
+    '''======== SET FED ID ================================================='''
     # Set the species fed id.
+    #I've explained this in sapient.py
     def set_id(self,idIn):
         if(idIn == None):
             self.name_pos.attrib['transform'] = "translate(-139.5019,0)"
@@ -149,96 +176,164 @@ class builder:
         else:
             self.name_pos.attrib['transform'] = "translate(-139.5019,-46.630571)"
             self.fed_id.text = idIn
+    '''====================================================================='''
 
+
+    '''======== SET BLOOD COLOR ============================================'''
     # Set the blood color text.
     def set_blood(self,bloodIn):
         self.blood.text = bloodIn
+    '''====================================================================='''
 
-    # Set the heights
+
+    '''======== SET BISTANCED HEIGHT ======================================='''
+    # Set the heights for species with two stances.
     def set_bistance(self,stance0,height0,stance1,height1):
+        #-------- CLEAR MONOSTANCE TEXT --------------------------------------#
         self.monostance_stance.text = ' '
         self.monostance_height.text = ' '
+        #---------------------------------------------------------------------#
 
+        #-------- SET BISTANCE TEXT ------------------------------------------#
         self.bistance_stance[0].text = stance0
         self.bistance_height[0].text = height0
 
         self.bistance_stance[1].text = stance1
         self.bistance_height[1].text = height1
+        #---------------------------------------------------------------------#
+    '''====================================================================='''
 
+
+    '''======== SET MONOSTANCED HEIGHT ====================================='''
+    #Set the height for species with only one stance.
     def set_monostance(self,stance,height):
+        #-------- CLEAR BISTANCE TEXT ----------------------------------------#
         for st in self.bistance_height:
             st.text = ' '
         
         for st in self.bistance_stance:
             st.text = ' '
+        #---------------------------------------------------------------------#
         
+        #-------- SET MONOSTANCE TEXT ----------------------------------------#
         self.monostance_stance.text = stance
         self.monostance_height.text = height
+        #---------------------------------------------------------------------#
+    '''====================================================================='''
 
+
+    '''======== SET HOMEWORLD =============================================='''
     # Set the homeworld
     def set_homeworld(self,homeworldIn):
         self.homeworld.text = homeworldIn
+    '''====================================================================='''
 
+
+    '''======== SET DIET ==================================================='''
     # Set the diet
     def set_diet(self,dietIn):
         self.diet.text = dietIn
+    '''====================================================================='''
 
+
+    '''======== SET AFFILIATION HEADER ====================================='''
     # Set affiliations
     def set_affil_head(self,index,head):
         self.affilheads[index].text = head
-    
+    '''====================================================================='''
+
+
+    '''======== SET AFFILIATION DESCRIPTION ================================'''    
     def set_affil_desc(self,index,desc):
         self.affildescs[index].text = desc
-    
+    '''====================================================================='''
+
+
+    '''======== SET FANFIC INFO ============================================'''    
     def set_fanfic(self,name,author):
+        #-------- FANFIC HAS NO NAME, CLEAR DATA -----------------------------#
         if(name == None):
             self.fanfic = False
             self.ffrom.text = ' '
             self.ftitle.text = ' '
             self.fauth.text = ' '
+        #-------- FANFIC HAS NAME, SET DATA ----------------------------------#
         else:
             self.fanfic = True
             self.ffrom.text = 'from'
             self.ftitle.text = name
             self.fauth.text = author
-        
-        self.set_badges(self.isCured, self.isAltered)
+        #---------------------------------------------------------------------#
 
-    # Set image
+        #Reposition the badges
+        self.set_badges(self.isCured, self.isAltered)
+    '''====================================================================='''
+
+
+    '''======== SET IMAGE =================================================='''
+    # Set image, and fallback if there is none
     def set_image(self,imagefile):
+        # Image exists, set it
         if(os.path.exists(imagefile)):
             self.kisser.attrib['href'] = imagefile
+        # Image doesn't exist, do nothing.
         else:
             self.kisser.attrib['href'] = "./assets/placeholder-kisser.png"
-    
+    '''====================================================================='''
+
+
+    '''======== POSITION BADGES ============================================'''
+    # Set badge options
     def set_badges(self, cure, alter):
+        #-------- SET CURE DATA ----------------------------------------------#
         self.isCured = cure
         self.isAltered = alter
+        #---------------------------------------------------------------------#
+
+        #-------- CURED AND ALTERED ------------------------------------------#
         if(cure and alter):
+            #There is a fanfic, position both badges on the left side.
             if(self.fanfic):
                 self.cure_badge.attrib['transform'] = "translate(-412.07,-1060.24)"
                 self.alter_badge.attrib['transform'] = "translate(-374.967,-891.952)"
+            #There is no fanfic, position on either side of the portrait
             else:
                 self.cure_badge.attrib['transform'] = "translate(-412.07,-982.96)"
                 self.alter_badge.attrib['transform'] = "translate(177.033,-982.973)"
+        #-------- ONLY CURE --------------------------------------------------#
         elif(cure):
             self.cure_badge.attrib['transform'] = "translate(-412.07,-982.96)"
             self.alter_badge.attrib['transform'] = "translate(0,0)"
+        #-------- ONLY ALTER -------------------------------------------------#
         elif(alter):
             self.cure_badge.attrib['transform'] = "translate(0,0)"
             self.alter_badge.attrib['transform'] = "translate(-374.967,-982.973)"
+        #-------- NO BADGES --------------------------------------------------#
         else:
             self.cure_badge.attrib['transform'] = "translate(0,0)"
             self.alter_badge.attrib['transform'] = "translate(0,0)"
+        #---------------------------------------------------------------------#
+    '''====================================================================='''
 
+
+    '''======== SET DESCRIPTION ============================================'''
+    #Set description
     def set_desc(self,descIn):
         self.desc.text = descIn
-    
+    '''====================================================================='''
+
+
+    '''======== SET FLAVOR TEXT ============================================'''
+    #Set the funny flavor text
     def set_flavor(self,flavorIn):
         self.flavor.text = flavorIn
+    '''====================================================================='''
 
-    
+
+    '''======== EXPORT FILE ================================================'''
     def export(self,filename):
         with open(filename, 'w') as file:
             file.write(etree.tostring(self.root).decode('utf-8'))
+    '''====================================================================='''
 
+'''=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+='''
