@@ -5,7 +5,7 @@ import subprocess
 import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
-table = datatable('/home/LaserBread/Downloads/NoP Infocards Master Table.xlsx')
+table = datatable('./card-table.xlsx')
 build = builder("./assets/template.svg")
 for sp in table.get_all():
     build.build(sp)
