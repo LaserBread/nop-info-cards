@@ -1,5 +1,5 @@
-google-auth
-google-auth-oauthlib
-google-auth-httplib2
-google-api-python-client
-pandas
+google_auth_oauthlib==1.2.1
+lxml==5.2.1
+pandas==2.2.3
+protobuf==5.29.3
+Requests==2.32.3
